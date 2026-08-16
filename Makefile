@@ -2,7 +2,7 @@
 
 ENV_FILE ?= .env
 COMPOSE := docker compose -f dev/compose.yaml
-ATLAS := DATABASE_URL=$$(grep -E '^DATABASE_URL=' $(ENV_FILE) | cut -d '=' -f2-) atlas
+ATLAS := DATABASE_URL=$$(grep -E '^DATABASE_URL=' $(ENV_FILE) | cut -d '=' -f2-) atlas -c file://configs/atlas.hcl
 
 help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'

@@ -18,7 +18,7 @@ type Config struct {
 type DatabaseConfig struct {
 	Host           string        `env:"HOST" envDefault:"localhost"`
 	Port           int           `env:"PORT" envDefault:"5432"`
-	Name           string        `env:"NAME" envDefault:"lms_core"`
+	Name           string        `env:"NAME" envDefault:"salung"`
 	User           string        `env:"USER,required"`
 	Password       string        `env:"PASSWORD,required"`
 	SSLMode        string        `env:"SSLMODE" envDefault:"disable"`

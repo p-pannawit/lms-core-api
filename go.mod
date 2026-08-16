@@ -1,4 +1,4 @@
-module lms-core-api
+module github.com/p-pannawit/salung-api
 
 go 1.26.6
 

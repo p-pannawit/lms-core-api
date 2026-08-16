@@ -6,7 +6,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"lms-core-api/internal/health"
+	"github.com/p-pannawit/salung-api/internal/health"
 )
 
 func New(database *sql.DB) *gin.Engine {

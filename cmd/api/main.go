@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"log"
 
-	"lms-core-api/internal/config"
-	"lms-core-api/internal/database"
-	"lms-core-api/internal/server"
+	"github.com/p-pannawit/salung-api/internal/config"
+	"github.com/p-pannawit/salung-api/internal/database"
+	"github.com/p-pannawit/salung-api/internal/server"
 )
 
 func main() {

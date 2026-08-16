@@ -1,4 +1,4 @@
-# lms-core-api
+# salung-api
 
 ## Local development
 

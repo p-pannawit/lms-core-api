@@ -11,7 +11,7 @@ import (
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 
-	"lms-core-api/internal/config"
+	"github.com/p-pannawit/salung-api/internal/config"
 )
 
 func Open(ctx context.Context, cfg config.DatabaseConfig) (*gorm.DB, *sql.DB, error) {

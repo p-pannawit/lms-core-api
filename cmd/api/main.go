@@ -16,7 +16,7 @@ func main() {
 		log.Fatalf("load configuration: %v", err)
 	}
 
-	_, sqlDB, err := database.Open(context.Background(), cfg.Database)
+	_, sqlDB, err := database.Open(context.Background(), cfg.DatabaseURL)
 	if err != nil {
 		log.Fatalf("connect to database: %v", err)
 	}

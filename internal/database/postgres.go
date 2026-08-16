@@ -4,18 +4,16 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
-	"net"
-	"net/url"
-	"strconv"
+	"time"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
-
-	"github.com/p-pannawit/salung-api/internal/config"
 )
 
-func Open(ctx context.Context, cfg config.DatabaseConfig) (*gorm.DB, *sql.DB, error) {
-	gormDB, err := gorm.Open(postgres.Open(connectionURL(cfg)), &gorm.Config{})
+const pingTimeout = 5 * time.Second
+
+func Open(ctx context.Context, dsn string) (*gorm.DB, *sql.DB, error) {
+	gormDB, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		return nil, nil, fmt.Errorf("open gorm connection: %w", err)
 	}
@@ -25,7 +23,7 @@ func Open(ctx context.Context, cfg config.DatabaseConfig) (*gorm.DB, *sql.DB, er
 		return nil, nil, fmt.Errorf("get sql database: %w", err)
 	}
 
-	pingContext, cancel := context.WithTimeout(ctx, cfg.ConnectTimeout)
+	pingContext, cancel := context.WithTimeout(ctx, pingTimeout)
 	defer cancel()
 	if err := sqlDB.PingContext(pingContext); err != nil {
 		sqlDB.Close()
@@ -33,19 +31,4 @@ func Open(ctx context.Context, cfg config.DatabaseConfig) (*gorm.DB, *sql.DB, er
 	}
 
 	return gormDB, sqlDB, nil
-}
-
-func connectionURL(cfg config.DatabaseConfig) string {
-	connectionURL := &url.URL{
-		Scheme: "postgres",
-		User:   url.UserPassword(cfg.User, cfg.Password),
-		Host:   net.JoinHostPort(cfg.Host, strconv.Itoa(cfg.Port)),
-		Path:   cfg.Name,
-	}
-
-	query := connectionURL.Query()
-	query.Set("sslmode", cfg.SSLMode)
-	connectionURL.RawQuery = query.Encode()
-
-	return connectionURL.String()
 }

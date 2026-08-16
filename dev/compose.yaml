@@ -1,4 +1,4 @@
-name: lms-core-api-local
+name: salung-api-local
 
 services:
   postgres:

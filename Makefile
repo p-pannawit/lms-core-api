@@ -1,7 +1,7 @@
 .PHONY: help db-up db-down migrate-status migrate-diff migrate-apply run build test
 
 ENV_FILE ?= .env
-COMPOSE := docker compose --env-file $(ENV_FILE) -f dev/compose.yaml
+COMPOSE := docker compose -f dev/compose.yaml
 ATLAS := DATABASE_URL=$$(grep -E '^DATABASE_URL=' $(ENV_FILE) | cut -d '=' -f2-) atlas
 
 help: ## Show this help

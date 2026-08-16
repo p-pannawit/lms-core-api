@@ -11,7 +11,7 @@
 2. Start PostgreSQL:
 
    ```sh
-   docker compose --env-file .env -f dev/compose.yaml up -d
+   make db-up
    ```
 
 3. Run the API:
@@ -22,8 +22,8 @@
 
 The API loads `.env` when it exists for local development, then parses and
 validates its configuration with `caarlos0/env`. In deployed environments,
-inject the same variables through the process environment; those values take
-precedence over `.env`.
+inject `APP_PORT` and `DATABASE_URL` through the process environment; those
+values take precedence over `.env`.
 
 Check the service:
 

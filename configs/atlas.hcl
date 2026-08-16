@@ -5,7 +5,7 @@ data "external_schema" "gorm" {
     "-mod=mod",
     "ariga.io/atlas-provider-gorm",
     "load",
-    "--path", "./internal/database/model",
+    "--path", "./internal/model",
     "--dialect", "postgres",
   ]
 }
@@ -18,6 +18,6 @@ env "local" {
   dev = "postgres://postgres:postgres@localhost:5432/salung_dev?sslmode=disable"
 
   migration {
-    dir = "file://internal/database/migration"
+    dir = "file://migration"
   }
 }
